@@ -1,0 +1,25 @@
+{
+  "name": "paga-business",
+  "version": "1.0.2",
+  "description": "Paga is a simple way to send and receive money",
+  "main": "PagaBusinessClient.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "keywords": [
+    "payment",
+    "API",
+    "naira",
+    "Paga"
+  ],
+  "author": "Paga",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "js-sha512": "^0.8.0",
+    "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0"
+  }
+}
