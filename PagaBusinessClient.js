@@ -9,7 +9,7 @@ function PagaBusinessClient(build){
     this.hash = build.apiKey;
     this.test = build.test; 
 
-	const test_server = "https://qa1.";
+	const test_server = "https://beta.";
 	const live_server = "https://www.";
     const service_url = "mypaga.com/paga-webservices/business-rest/";
 
