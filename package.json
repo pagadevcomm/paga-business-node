@@ -1,6 +1,6 @@
 {
   "name": "paga-business",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Paga is a simple way to send and receive money",
   "main": "PagaBusinessClient.js",
   "scripts": {
