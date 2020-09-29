@@ -48,35 +48,13 @@ As shown above, you set the principal and credential given to you by Paga, If yo
 The Register Customer operation allows 3rd Parties to register customers on Paga. New customers will be contacted to setup their authentication credentials. To make use of this function, call the **registerCustomer** inside the BusinessClient which will return a JSONObject for the registered customer.
 
 ```
-pagaBusinessClient.registerCustomer("referenceNumber",
+pagaBusinessClient.registerCustomer(
+    "referenceNumber",
     "customerPhoneNumber",
     "customerEmail",
     "customerFirstName",
     "customerLastName",
     "customerDateOfBirth",
-    "customerGender",
-    "customerAddress.country",
-    "customerAddress.region",
-    "customerAddress.county",
-    "customerAddress.city",
-    "customerAddress.localGovernmentArea",
-    "customerAddress.streetAddress",
-    "customerAddress.postalCode",
-    "customerAddress.landmark",
-    "customerAddress.freeformAddress",
-    "customerMaritalStatus",
-    "customerPreferredLanguageISOCode",
-    "customerReferredByPhoneNumber",
-    "customerReferredByFirstName",
-    "customerReferredByLastName",
-    "customerIdType",
-    "customerIdNumber",
-    "customerIdExpirationDate",
-    "optinForWalletSavings",
-    "customerSupplementaryDetailsNextOfKinLastName",
-    "customerSupplementaryDetailsNextOfKinFirstName",
-    "customerSupplementaryDetailsNextOfKinType",
-    "customerSupplementaryDetailsNextOfKinPhoneNumber"
 ).then(resp => {
     console.log(JSON.stringify(resp))
 })
