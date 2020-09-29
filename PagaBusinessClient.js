@@ -308,7 +308,7 @@ console.log(unirest.request)
 
             let response;
             try {
-                response = await this.buildFormRequest(server + service_url + "secured/registerCustomer", hashString, obj)
+                response = await this.buildRequest(server + service_url + "secured/registerCustomer", hashString, obj)
             } catch (error) {
                 response = {
                     "errorCode" : -1,
