@@ -3,11 +3,12 @@ const sha512 = require('js-sha512').sha512;
 const unirest = require('unirest');
 
 function PagaBusinessClient(build){
+    const {clientId,password,apiKey,test} = build;
 
-    this.principal = build.clientId;
-    this.password = build.password;
-    this.hash = build.apiKey;
-    this.test = build.test; 
+    this.principal = clientId;
+    this.password = password;
+    this.hash = apiKey;
+    this.test = test; 
 
 	const test_server = "https://beta.";
 	const live_server = "https://www.";
@@ -407,22 +408,39 @@ this.moneyTransfer = async (
        
         var server = (this.test) ? test_server : live_server;
 
-        var obj = {
-            "referenceNumber" : referenceNumber,
-            "amount" : amount,
-            "currency" : currency,
-            "destinationAccount" : destinationAccount,
-            "destinationBank" : destinationBank,
-            "senderPrincipal" : senderPrincipal,
-            "senderCredentials" :senderCredentials,
-            "sendWithdrawalCode" : withdrawalCode,
-            "sourceOfFunds" : sourceOfFunds,
-            "transferReference" : transferReference,
-            "suppressRecipientMsg" : suppressRecipientMsg,
-            "locale" : locale,
-            "alternateSenderName" : alternateSenderName,
-            "minRecipientKYCLevel" : minRecipientKYCLevel,
-            "holdingPeriod" : holdingPeriod
+        // var obj = {
+        //     "referenceNumber" : referenceNumber,
+        //     "amount" : amount,
+        //     "currency" : currency,
+        //     "destinationAccount" : destinationAccount,
+        //     "destinationBank" : destinationBank,
+        //     "senderPrincipal" : senderPrincipal,
+        //     "senderCredentials" :senderCredentials,
+        //     "sendWithdrawalCode" : withdrawalCode,
+        //     "sourceOfFunds" : sourceOfFunds,
+        //     "transferReference" : transferReference,
+        //     "suppressRecipientMsg" : suppressRecipientMsg,
+        //     "locale" : locale,
+        //     "alternateSenderName" : alternateSenderName,
+        //     "minRecipientKYCLevel" : minRecipientKYCLevel,
+        //     "holdingPeriod" : holdingPeriod
+        // }
+        const obj = {
+            referenceNumber,
+            amount,
+            currency,
+            destinationAccount,
+            destinationBank,
+            senderPrincipal,
+            senderCredentials,
+            sendWithdrawalCode,
+            sourceOfFunds,
+            transferReference,
+            suppressRecipientMsg,
+            locale,
+            alternateSenderName,
+            miniRecipentKYCLevel,
+            holdingPeriod
         }
 
         var sBuilder = []
