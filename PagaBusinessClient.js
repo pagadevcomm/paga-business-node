@@ -167,99 +167,99 @@ console.log(unirest.request)
                                                 "pagaAccountNumber: 123456789"
                                             }
  */
-    this.registerCustomerWithKYC = async (
-                referenceNumber,        
-                customerPhoneNumber,             
-                customerFirstName,      
-                customerLastName,
-                customerEmail,       
-                customerDateOfBirth,    
-                customerGender,
-                customerAddressCountry,
-                customerAddressRegion,
-                customerAddressCounty, 
-                customerAddressCity,
-                customerAddressLocalGovernmentArea,
-                customerAddressStreetAddress,
-                customerAddressPostalCode, 
-                customerAddressLandmark,
-                customerAddressFreeformAddress,
-                customerMaritalStatus,
-                customerPreferredLanguageISOCode, 
-                customerReferredByFirstName,      
-                customerReferredByLastName, 
-                customerReferredByPhoneNumber,
-                customerIdType,
-                customerIdNumber,
-                customerIdExpirationDate, 
-                optinForWalletSavings,
-                customerSupplementaryDetailsNextOfKinLastName, 
-                customerSupplementaryDetailsNextOfKinFirstName,
-                customerSupplementaryDetailsNextOfKinType,
-                customerSupplementaryDetailsNextOfKinPhoneNumber ) => {
+    // this.registerCustomerWithKYC = async (
+    //             referenceNumber,        
+    //             customerPhoneNumber,             
+    //             customerFirstName,      
+    //             customerLastName,
+    //             customerEmail,       
+    //             customerDateOfBirth,    
+    //             customerGender,
+    //             customerAddressCountry,
+    //             customerAddressRegion,
+    //             customerAddressCounty, 
+    //             customerAddressCity,
+    //             customerAddressLocalGovernmentArea,
+    //             customerAddressStreetAddress,
+    //             customerAddressPostalCode, 
+    //             customerAddressLandmark,
+    //             customerAddressFreeformAddress,
+    //             customerMaritalStatus,
+    //             customerPreferredLanguageISOCode, 
+    //             customerReferredByFirstName,      
+    //             customerReferredByLastName, 
+    //             customerReferredByPhoneNumber,
+    //             customerIdType,
+    //             customerIdNumber,
+    //             customerIdExpirationDate, 
+    //             optinForWalletSavings,
+    //             customerSupplementaryDetailsNextOfKinLastName, 
+    //             customerSupplementaryDetailsNextOfKinFirstName,
+    //             customerSupplementaryDetailsNextOfKinType,
+    //             customerSupplementaryDetailsNextOfKinPhoneNumber ) => {
 
-            var dob = (customerDateOfBirth != null) ? this.formatDate(customerDateOfBirth,'/'): null;
+    //         var dob = (customerDateOfBirth != null) ? this.formatDate(customerDateOfBirth,'/'): null;
 
-            var doe = (customerIdExpirationDate != null) ? this.formatDate(customerIdExpirationDate,'/'): null;
+    //         var doe = (customerIdExpirationDate != null) ? this.formatDate(customerIdExpirationDate,'/'): null;
            
-            var server = (this.test) ? test_server : live_server;
+    //         var server = (this.test) ? test_server : live_server;
 
-            var obj = {
-                "referenceNumber": referenceNumber,
-                "customerPhoneNumber": customerPhoneNumber,
-                "customerFirstName": customerFirstName,
-                "customerLastName": customerLastName,
-                "customerEmail": customerEmail,
-                "customerDateOfBirth" : ((dob != null) ? dob : null),
-                "customerGender": customerGender,
-                "customerAddress": { 
-                    "country": customerAddressCountry,
-                    "region": customerAddressRegion,
-                    "county" : customerAddressCounty,
-                    "city" : customerAddressCity,
-                    "localGovernmentArea": customerAddressLocalGovernmentArea,
-                    "streetAddress": customerAddressStreetAddress,
-                    "postalCode" : customerAddressPostalCode,
-                    "landmark": customerAddressLandmark,
-                    "freeformAddress": customerAddressFreeformAddress,
+    //         var obj = {
+    //             "referenceNumber": referenceNumber,
+    //             "customerPhoneNumber": customerPhoneNumber,
+    //             "customerFirstName": customerFirstName,
+    //             "customerLastName": customerLastName,
+    //             "customerEmail": customerEmail,
+    //             "customerDateOfBirth" : ((dob != null) ? dob : null),
+    //             "customerGender": customerGender,
+    //             "customerAddress": { 
+    //                 "country": customerAddressCountry,
+    //                 "region": customerAddressRegion,
+    //                 "county" : customerAddressCounty,
+    //                 "city" : customerAddressCity,
+    //                 "localGovernmentArea": customerAddressLocalGovernmentArea,
+    //                 "streetAddress": customerAddressStreetAddress,
+    //                 "postalCode" : customerAddressPostalCode,
+    //                 "landmark": customerAddressLandmark,
+    //                 "freeformAddress": customerAddressFreeformAddress,
 
-                },
-                "customerMaritalStatus": customerMaritalStatus,
-                "customerPreferredLanguageISOCode": customerPreferredLanguageISOCode,
-                "customerReferredByFirstName": customerReferredByFirstName,
-                "customerReferredByLastName": customerReferredByLastName,
-                "customerReferredByPhoneNumber": customerReferredByPhoneNumber,
-                "customerIdType": customerIdType,
-                "customerIdNumber": customerIdNumber,
-                "customerIdExpirationDate": ((doe != null) ? doe : null),
-                "optinForWalletSavings": optinForWalletSavings,
-                "customerSupplementaryDetails":{ 
-                    "NextOfKinLastName": customerSupplementaryDetailsNextOfKinLastName,
-                    "NextOfKinFirstName": customerSupplementaryDetailsNextOfKinFirstName,
-                    "NextOfKinType": customerSupplementaryDetailsNextOfKinType,
-                    "NextOfKinPhoneNumber": customerSupplementaryDetailsNextOfKinPhoneNumber
-                }
-            }
+    //             },
+    //             "customerMaritalStatus": customerMaritalStatus,
+    //             "customerPreferredLanguageISOCode": customerPreferredLanguageISOCode,
+    //             "customerReferredByFirstName": customerReferredByFirstName,
+    //             "customerReferredByLastName": customerReferredByLastName,
+    //             "customerReferredByPhoneNumber": customerReferredByPhoneNumber,
+    //             "customerIdType": customerIdType,
+    //             "customerIdNumber": customerIdNumber,
+    //             "customerIdExpirationDate": ((doe != null) ? doe : null),
+    //             "optinForWalletSavings": optinForWalletSavings,
+    //             "customerSupplementaryDetails":{ 
+    //                 "NextOfKinLastName": customerSupplementaryDetailsNextOfKinLastName,
+    //                 "NextOfKinFirstName": customerSupplementaryDetailsNextOfKinFirstName,
+    //                 "NextOfKinType": customerSupplementaryDetailsNextOfKinType,
+    //                 "NextOfKinPhoneNumber": customerSupplementaryDetailsNextOfKinPhoneNumber
+    //             }
+    //         }
 
-            var sBuilder = []
-            sBuilder.push(referenceNumber + customerPhoneNumber + customerFirstName + customerLastName + this.hash)
-            sBuilder.join("")
+    //         var sBuilder = []
+    //         sBuilder.push(referenceNumber + customerPhoneNumber + customerFirstName + customerLastName + this.hash)
+    //         sBuilder.join("")
 
-            var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    //         var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
  
-            var response
-            try {
-                response = await this.buildFormRequest(server + service_url + "secured/registerCustomerWithKYC", hashString, obj)
-            } catch (error) {
-                response = {
-                    "errorCode" : -1,
-                    "exception" : error,
-                }
-            } finally {
-                return response;
-            }
+    //         var response
+    //         try {
+    //             response = await this.buildFormRequest(server + service_url + "secured/registerCustomerWithKYC", hashString, obj)
+    //         } catch (error) {
+    //             response = {
+    //                 "errorCode" : -1,
+    //                 "exception" : error,
+    //             }
+    //         } finally {
+    //             return response;
+    //         }
 
-        }
+    //     }
 
 
 /**
