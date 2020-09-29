@@ -167,7 +167,7 @@ console.log(unirest.request)
                                                 "pagaAccountNumber: 123456789"
                                             }
  */
-    this.registerCustomer = async (
+    this.registerCustomerWithKYC = async (
                 referenceNumber,        
                 customerPhoneNumber,             
                 customerFirstName,      
@@ -249,7 +249,7 @@ console.log(unirest.request)
  
             var response
             try {
-                response = await this.buildFormRequest(server + service_url + "secured/registerCustomer", hashString, obj)
+                response = await this.buildFormRequest(server + service_url + "secured/registerCustomerWithKYC", hashString, obj)
             } catch (error) {
                 response = {
                     "errorCode" : -1,
@@ -259,6 +259,64 @@ console.log(unirest.request)
                 return response;
             }
 
+        }
+
+
+/**
+ * @param   {string}  referenceNumber        A unique reference number for this request. This same reference number will be returned in the response.
+ * @param   {string}  customerPhoneNumber    The phone number of the new customer. This number must not belong to an existing registered customer
+ * @param   {string}   customerEmail         The email of the new customer  
+ * @param   {string}  customerFirstName      The first name of the customer
+ * @param   {string}  customerLastName       The Last name of the customer
+ * @param   {string}  customerDateOfBirth    Birth date of the customer
+ * @return {Promise}                         A Promise Object thats receives the response
+ *         Sample Successful response =>    {
+                                                "message":"Thank for registering to paga. We will send SMS to +251911010862 with a registeration code. Please use www.mypaga.com or dial 636 to set up your user PIN.",
+                                                "referenceNumber":"",
+                                                "responseCode":0,
+                                                "pagaAccountNumber: 123456789"
+                                            }
+ */
+
+        this.registerCustomer =  async (
+            referenceNumber,
+            customerPhoneNumber,
+            customerEmail,
+            customerFirstName,
+            customerLastName,
+            customerDateOfBirth,
+        ) => {
+            let dob = (customerDateOfBirth != null) ? this.formatDate(customerDateOfBirth,'/'): null;
+
+            let server = (this.test) ? test_server : live_server;
+
+            let obj = {
+                "referenceNumber": referenceNumber,
+                "customerPhoneNumber": customerPhoneNumber,
+                "customerFirstName": customerFirstName,
+                "customerLastName": customerLastName,
+                "customerEmail": customerEmail,
+                "customerDateOfBirth" : ((dob != null) ? dob : null),
+            }
+
+            let sBuilder = [];
+
+            sBuilder.push(referenceNumber + customerPhoneNumber + customerFirstName + customerLastName + this.hash)
+            sBuilder.join("")
+
+            let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+
+            let response;
+            try {
+                response = await this.buildFormRequest(server + service_url + "secured/registerCustomer", hashString, obj)
+            } catch (error) {
+                response = {
+                    "errorCode" : -1,
+                    "exception" : error,
+                }
+            } finally {
+                return response;
+            } 
         }
 
 /**
