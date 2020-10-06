@@ -32,8 +32,8 @@ function PagaBusinessClient(build){
     }
 
     this.arr = function(...ele) {
-        var list = []
-        if(ele == null || ele == "") {
+        let list = []
+        if(ele == null ||  "") {
             return null
         }
         ele.forEach(function(element){
@@ -69,7 +69,7 @@ function PagaBusinessClient(build){
         .headers({
             'content-type': 'multipart/form-data',
                 'boundary' : 'TEIJNCQ5bVQ6ocfU4BSpKzMEZ2nN7t',
-                'boundary': '6o2knFse3p53ty9dmcQvWAIx1zInP11uCfbm',
+                // 'boundary': '6o2knFse3p53ty9dmcQvWAIx1zInP11uCfbm',
                 'Accept': 'application/json',
                 'principal' : this.principal,
                 'credentials': this.password,
@@ -78,18 +78,16 @@ function PagaBusinessClient(build){
                 'name': 'customer',
                 'filename': 'file',
                 'Content-Type' : 'application/json',
-                'Accept': 'application/json'
         })
         .field("customer", body) // Form field
         // .attach('file', '/tmp/file') // Attachment
         .end(function (response) {
         console.log(response.body);
 });
-console.log(unirest.request)
     }
 
     this.formatDate = (date, separator) => {
-        var d = new Date(date),
+        let d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
             year = d.getFullYear();
@@ -102,11 +100,11 @@ console.log(unirest.request)
 
     this.createHashSHA512 = (message, iterations, returnHex) => {
 
-        var hash = sha512.create()
+        let hash = sha512.create()
         hash.update(message)
 
-        var byteTemp = hash.digest();
-        var digest;
+        let byteTemp = hash.digest();
+        let digest;
 
         for (var i = 1; i < iterations; i++){
             byteTemp = hash.digest();
@@ -127,47 +125,47 @@ console.log(unirest.request)
 
     }
 
-/**
- * @param   {string}  referenceNumber        A unique reference number for this request. This same reference number will be returned in the response.
- * @param   {string}  customerPhoneNumber    The phone number of the new customer. This number must not belong to an existing registered customer
- * @param   {string}   customerEmail         The email of the new customer  
- * @param   {string}  customerFirstName      The first name of the customer
- * @param   {string}  customerLastName       The Last name of the customer
- * @param   {string}  customerDateOfBirth    Birth date of the customer
- * @param   {string}  customerGender       The gender of the new customer. Must be on of (FEMALE, MALE)
- * @param   {Object}  customerAddress       The Address of the new customer
- * @param   {string}  customerAddress.country     The country of the address. Must be provided is address is provided
- * @param   {string}  customerAddress.region       The region/state of the address. Must be provided is address is provided
- * @param   {string}  customerAddress.county       The county/zone of the address.
- * @param   {string}  customerAddress.city       The city of the address.
- * @param   {string}  customerAddress.localGovernmentArea       The local government area/district of the address.
- * @param   {string}  customerAddress.streetAddress       The street address of the address
- * @param   {string}  customerAddress.postalCode       The postal code of the address
- * @param   {string}  customerAddress.landmark       A landmark for the the address
- * @param   {string}  customerAddress.freeformAddress     A free-form description of the address
- * @param   {string}  customerMaritalStatus    The marital status of the new customer. Must be one of (SINGLE, MARRIED, DIVORCED)
- * @param   {string}  customerPreferredLanguageISOCode         The ISO 639-1 code of the new customer’s preferred language. Must be a valid ISO 639-1 code. See: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
- * @param   {string}  customerReferredByPhoneNumber              The phone number of the person who referred the new customer
- * @param   {string}  customerReferredByFirstName            The first name of the person who referred the new customer
- * @param   {string}  customerReferredByLastName           The last name of the person who referred the new customer
- * @param   {string}  customerIdType           The type of identification captured for th new customer. Must be one of (DRIVERS_LICENCE, NATIONAL_ID, PASSPORT, VOTERS_CARD)
- * @param   {string}  customerIdNumber            The number of the identification captured for the new customer. This must be provided if customerIdType is provided
- * @param   {string}  customerIdExpirationDate           The expiration date of the identification captured for th new customer. Format must be YYYY-MM-DD
- * @param   {Boolean}  optinForWalletSavings            If the customer opted in for transactional savings wallet
- * @param   {Object}  customerSupplementaryDetails            A name/value map of additional customer details captured
- * @param   {String}  customerSupplementaryDetails.nextOfKinLastName            A name/value map of additional customer details captured
- * @param   {String}  customerSupplementaryDetails.nextOfKinFirstName            A name/value map of additional customer details captured
- * @param   {String}  customerSupplementaryDetails.nextOfKinType            A name/value map of additional customer details captured
- * @param   {String}  customerSupplementaryDetails.nextOfKinPhoneNumber            A name/value map of additional customer details captured
- * 
- * @return {Promise}                         A Promise Object thats receives the response
- *         Sample Successful response =>    {
-                                                "message":"Thank for registering to paga. We will send SMS to +251911010862 with a registeration code. Please use www.mypaga.com or dial 636 to set up your user PIN.",
-                                                "referenceNumber":"",
-                                                "responseCode":0,
-                                                "pagaAccountNumber: 123456789"
-                                            }
- */
+// /**
+//  * @param   {string}  referenceNumber        A unique reference number for this request. This same reference number will be returned in the response.
+//  * @param   {string}  customerPhoneNumber    The phone number of the new customer. This number must not belong to an existing registered customer
+//  * @param   {string}   customerEmail         The email of the new customer  
+//  * @param   {string}  customerFirstName      The first name of the customer
+//  * @param   {string}  customerLastName       The Last name of the customer
+//  * @param   {string}  customerDateOfBirth    Birth date of the customer
+//  * @param   {string}  customerGender       The gender of the new customer. Must be on of (FEMALE, MALE)
+//  * @param   {Object}  customerAddress       The Address of the new customer
+//  * @param   {string}  customerAddress.country     The country of the address. Must be provided is address is provided
+//  * @param   {string}  customerAddress.region       The region/state of the address. Must be provided is address is provided
+//  * @param   {string}  customerAddress.county       The county/zone of the address.
+//  * @param   {string}  customerAddress.city       The city of the address.
+//  * @param   {string}  customerAddress.localGovernmentArea       The local government area/district of the address.
+//  * @param   {string}  customerAddress.streetAddress       The street address of the address
+//  * @param   {string}  customerAddress.postalCode       The postal code of the address
+//  * @param   {string}  customerAddress.landmark       A landmark for the the address
+//  * @param   {string}  customerAddress.freeformAddress     A free-form description of the address
+//  * @param   {string}  customerMaritalStatus    The marital status of the new customer. Must be one of (SINGLE, MARRIED, DIVORCED)
+//  * @param   {string}  customerPreferredLanguageISOCode         The ISO 639-1 code of the new customer’s preferred language. Must be a valid ISO 639-1 code. See: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+//  * @param   {string}  customerReferredByPhoneNumber              The phone number of the person who referred the new customer
+//  * @param   {string}  customerReferredByFirstName            The first name of the person who referred the new customer
+//  * @param   {string}  customerReferredByLastName           The last name of the person who referred the new customer
+//  * @param   {string}  customerIdType           The type of identification captured for th new customer. Must be one of (DRIVERS_LICENCE, NATIONAL_ID, PASSPORT, VOTERS_CARD)
+//  * @param   {string}  customerIdNumber            The number of the identification captured for the new customer. This must be provided if customerIdType is provided
+//  * @param   {string}  customerIdExpirationDate           The expiration date of the identification captured for th new customer. Format must be YYYY-MM-DD
+//  * @param   {Boolean}  optinForWalletSavings            If the customer opted in for transactional savings wallet
+//  * @param   {Object}  customerSupplementaryDetails            A name/value map of additional customer details captured
+//  * @param   {String}  customerSupplementaryDetails.nextOfKinLastName            A name/value map of additional customer details captured
+//  * @param   {String}  customerSupplementaryDetails.nextOfKinFirstName            A name/value map of additional customer details captured
+//  * @param   {String}  customerSupplementaryDetails.nextOfKinType            A name/value map of additional customer details captured
+//  * @param   {String}  customerSupplementaryDetails.nextOfKinPhoneNumber            A name/value map of additional customer details captured
+//  * 
+//  * @return {Promise}                         A Promise Object thats receives the response
+//  *         Sample Successful response =>    {
+//                                                 "message":"Thank for registering to paga. We will send SMS to +251911010862 with a registeration code. Please use www.mypaga.com or dial 636 to set up your user PIN.",
+//                                                 "referenceNumber":"",
+//                                                 "responseCode":0,
+//                                                 "pagaAccountNumber: 123456789"
+//                                             }
+//  */
     // this.registerCustomerWithKYC = async (
     //             referenceNumber,        
     //             customerPhoneNumber,             
@@ -290,14 +288,13 @@ console.log(unirest.request)
             let dob = (customerDateOfBirth != null) ? this.formatDate(customerDateOfBirth,'/'): null;
 
             let server = (this.test) ? test_server : live_server;
-
             let obj = {
-                "referenceNumber": referenceNumber,
-                "customerPhoneNumber": customerPhoneNumber,
-                "customerFirstName": customerFirstName,
-                "customerLastName": customerLastName,
-                "customerEmail": customerEmail,
-                "customerDateOfBirth" : ((dob != null) ? dob : null),
+                referenceNumber,
+                customerPhoneNumber,
+                customerFirstName,
+                customerLastName,
+                customerEmail,
+                "customerDateOfBirth" : dob,
             }
 
             let sBuilder = [];
@@ -337,21 +334,21 @@ console.log(unirest.request)
             referenceNumber, 
             customerPhoneNumber, customerAccountPhoto ) => {
                    
-                var server = (this.test) ? test_server : live_server;
+                let server = (this.test) ? test_server : live_server;
 
-                var obj = {
-                    "referenceNumber" : referenceNumber,
-                    "customerPhoneNumber": customerPhoneNumber,
-                    "customerAccountPhoto" : customerAccountPhoto
+                let obj = {
+                    referenceNumber,
+                    customerPhoneNumber,
+                    customerAccountPhoto
                 }
         
-                var sBuilder = []
+                let sBuilder = []
                 sBuilder.push(referenceNumber + customerPhoneNumber + this.hash)
                 sBuilder.join("")
         
-                var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+                let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
         
-                var response
+                let response;
                 try {
                     response = await this.buildFormRequest(server + service_url + "secured/registerCustomerAccountPhoto", hashString, obj)
                 } catch (error) {
@@ -387,23 +384,23 @@ this.registerCustomerIdentification = async (
     customerIdExpirationDate,
     customerIdPhoto ) => {
            
-        var server = (this.test) ? test_server : live_server;
+        let server = (this.test) ? test_server : live_server;
 
-        var obj = {
-            "referenceNumber" : referenceNumber,
-            "customerPhoneNumber": customerPhoneNumber,
-            "customerIdType": customerIdType,
-            "customerIdNumber": customerIdNumber,
-            "customerIdExpirationDate": customerIdExpirationDate
+        const obj = {
+            referenceNumber,
+            customerPhoneNumber,
+            customerIdType,
+            customerIdNumber,
+            customerIdExpirationDate
         }
 
-        var sBuilder = []
+        let sBuilder = []
         sBuilder.push(referenceNumber + customerPhoneNumber + customerIdType + customerIdNumber + customerIdExpirationDate + this.hash)
         sBuilder.join("")
 
-        var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+        let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-        var response
+        let response
         try {
             response = await this.buildFormRequest(server + service_url + "secured/registerCustomerIdentification", hashString, obj)
         } catch (error) {
@@ -432,7 +429,7 @@ this.registerCustomerIdentification = async (
  * @param   {string}  locale                        The language/locale to be used in messaging. If provided, this must conform to the IETF language tag standard.
  * @param   {string}  alternateSenderName           If the cash is being sent on behalf of the third party itself (i.e. sender principal is null), then an alternative name-of-sender can be specified here for use in the message sent to the money transfer recipient. This field is ignored if money transfer is sent on behalf of another user. This can be 16 characters in length.
  * @param   {number}  holdingPeriod                 The number of days with which the recipient's KYC must have before it is reverted back to the sender. It is only valid if the minKYCLevel is set and it's default to 120 days. If minKYCLevel is set and the recipient?s KYC is below it, then this will be the number of days it should wait to meet the minKYC Level provided. If the target KYC is not upgraded within this period the fund will be returned back to the sender?s account.
- * @param   {string}  miniRecipentKYCLevel          The minimum target KYC level the money transfer transaction recipient's paga account must have, can be one of KYC1, KYC2, and KYC3.
+ * @param   {string}  minRecipientKYCLevel         The minimum target KYC level the money transfer transaction recipient's paga account must have, can be one of KYC1, KYC2, and KYC3.
 
 
  * 
@@ -455,16 +452,16 @@ this.moneyTransfer = async (
                 destinationBank, 
                 senderPrincipal,
                 senderCredentials,
-                withdrawalCode,
+                sendWithdrawalCode,
                 sourceOfFunds,  
                 transferReference, 
-                suppressRecipientMsg, 
+                suppressRecipientMessage, 
                 locale, 
                 alternateSenderName,
                 minRecipientKYCLevel,
                 holdingPeriod ) => {
        
-        var server = (this.test) ? test_server : live_server;
+        let server = (this.test) ? test_server : live_server;
 
         // var obj = {
         //     "referenceNumber" : referenceNumber,
@@ -494,22 +491,22 @@ this.moneyTransfer = async (
             sendWithdrawalCode,
             sourceOfFunds,
             transferReference,
-            suppressRecipientMsg,
+            suppressRecipientMessage,
             locale,
             alternateSenderName,
-            miniRecipentKYCLevel,
+            minRecipientKYCLevel,
             holdingPeriod
         }
 
-        var sBuilder = []
+        let sBuilder = []
         sBuilder.push(referenceNumber + amount + destinationAccount + this.hash)
         sBuilder.join("")
 
-        var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+        let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-        var response
+        let response;
         try {
-            response = await this.buildRequest(server + service_url + "secured/moneyTransfer", hashString, obj)
+            response = await this.buildRequest(server + service_url + "secured/moneyTransfer", hashString, obj);
         } catch (error) {
             response = {
                 "errorCode" : -1,
@@ -553,26 +550,26 @@ this.airtimePurchase = async (
                 sourceOfFunds, 
                 locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "amount" : amount,
-       "currency" : currency,
-       "destinationPhoneNumber" : destinationPhoneNumber,
-       "purchaserPrincipal" : purchaserPrincipal,
-       "purchaserCredentials" : purchaserCredentials,
-       "sourceOfFunds" : sourceOfFunds,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       amount,
+       currency,
+       destinationPhoneNumber,
+       purchaserPrincipal,
+       purchaserCredentials,
+       sourceOfFunds,
+       locale
     }
 
-    var sBuilder = []
+    let sBuilder = []
     sBuilder.push(referenceNumber + amount + destinationPhoneNumber + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
         response = await this.buildRequest(server + service_url + "secured/airtimePurchase", hashString, obj)
     } catch (error) {
@@ -623,30 +620,30 @@ this.merchantPayment = async (
                 sourceOfFunds, 
                 locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "merchantReferenceNumber" : merchantReferenceNumber,
-       "amount" : amount,
-       "merchantAccount" : merchantAccount,
-       "referenceNumber" : referenceNumber,
-       "currency" : currency,
+    let obj = {
+       merchantReferenceNumber,
+       amount,
+       merchantAccount,
+       referenceNumber,
+       currency,
        "merchantService" : this.arr(merchantService),
-       "purchaserPrincipal" : purchaserPrincipal,
-       "purchaserCredentials" : purchaserCredentials,
-       "sourceOfFunds" : sourceOfFunds,
-       "locale" : locale
+       purchaserPrincipal,
+       purchaserCredentials,
+       sourceOfFunds,
+       locale
     }
 
-    var sBuilder = []
+    let sBuilder = []
     sBuilder.push(referenceNumber + amount + merchantAccount + merchantReferenceNumber + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/merchantPayment", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/merchantPayment", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -694,30 +691,30 @@ this.validateDepositToBank = async (
                 recipientName, 
                 locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "amount" : amount,
-       "currency" : currency,
-       "destinationBankUUID" : destinationBankUUID,
-       "destinationBankAccountNumber" : destinationBankAccountNumber,
-       "recipientPhoneNumber" : recipientPhoneNumber,
-       "recipientMobileOperatorCode" : recipientMobileOperatorCode,
-       "recipientEmail" : recipientEmail,
-       "recipientName" : recipientName,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       amount,
+       currency,
+       destinationBankUUID,
+       destinationBankAccountNumber,
+       recipientPhoneNumber,
+       recipientMobileOperatorCode,
+       recipientEmail,
+       recipientName,
+       locale
     }
 
-    var sBuilder = []
-    sBuilder.push(referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber + this.hash)
+    let sBuilder = []
+    sBuilder.push(referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber + this.hash);
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/validateDepositToBank", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/validateDepositToBank", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -774,33 +771,33 @@ this.depositToBank = async (
                 remarks, 
                 locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "amount" : amount,
-       "currency" : currency,
-       "destinationBankUUID" : destinationBankUUID,
-       "destinationBankAccountNumber" : destinationBankAccountNumber,
-       "recipientPhoneNumber" : recipientPhoneNumber,
-       "recipientMobileOperatorCode" : recipientMobileOperatorCode,
-       "recipientEmail" : recipientEmail,
-       "recipientName" : recipientName,
-       "alternateSenderName" : alternateSenderName,
-       "suppressRecipientMessage" : suppressRecipientMessage,
-       "remarks" : remarks,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       amount,
+       currency,
+       destinationBankUUID,
+       destinationBankAccountNumber,
+       recipientPhoneNumber,
+       recipientMobileOperatorCode,
+       recipientEmail,
+       recipientName,
+       alternateSenderName,
+       suppressRecipientMessage,
+       remarks,
+       locale
     }
 
-    var sBuilder = []
-    sBuilder.push(referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber + this.hash)
-    sBuilder.join("")
+    let sBuilder = [];
+    sBuilder.push(referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber + this.hash);
+    sBuilder.join("");
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/depositToBank", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/depositToBank", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -837,25 +834,25 @@ this.accountBalance = async (
                 sourceOfFunds, 
                 locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "accountPrincipal" : accountPrincipal,
-       "accountCredentials" : accountCredentials,
-       "sourceOfFunds" : sourceOfFunds,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       accountPrincipal,
+       accountCredentials,
+       sourceOfFunds,
+       locale
     }
 
-    var sBuilder = []
-    sBuilder.push(referenceNumber + this.hash)
-    sBuilder.join("")
+    let sBuilder = [];
+    sBuilder.push(referenceNumber + this.hash);
+    sBuilder.join("");
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/accountBalance", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/accountBalance", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -904,24 +901,24 @@ this.transactionHistory = async (
                 endDateUTC, 
                 locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "accountPrincipal" : accountPrincipal,
-       "accountCredentials" : accountCredentials,
-       "startDateUTC" : startDateUTC,
-       "endDateUTC" : endDateUTC,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       accountPrincipal,
+       accountCredentials,
+       startDateUTC,
+       endDateUTC,
+       locale
     }
 
-    var sBuilder = []
-    sBuilder.push(referenceNumber + this.hash)
-    sBuilder.join("")
+    let sBuilder = [];
+    sBuilder.push(referenceNumber + this.hash);
+    sBuilder.join("");
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
         response = await this.buildRequest(server + service_url + "secured/transactionHistory", hashString, obj)
     } catch (error) {
@@ -969,24 +966,24 @@ this.recentTransactionHistory = async (
                     accountCredentials, 
                     locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "accountPrincipal" : accountPrincipal,
-       "accountCredentials" : accountCredentials,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       accountPrincipal,
+       accountCredentials,
+       locale
     }
 
-    var sBuilder = []
+    let sBuilder = [];
     sBuilder.push(referenceNumber + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/recentTransactionHistory", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/recentTransactionHistory", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1023,22 +1020,22 @@ this.getMerchants = async (
                     referenceNumber, 
                     locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       locale
     }
 
-    var sBuilder = []
+    let sBuilder = []
     sBuilder.push(referenceNumber + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getMerchants", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getMerchants", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1056,7 +1053,7 @@ this.getMerchants = async (
 
 /**
  * @param   {string}    referenceNumber         A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response
- * @param   {string}    merchantId              The identifier which uniquely identifies the merchant on the Paga platform. May be the merchant UUID, id, or code.
+ * @param   {string}    merchantPublicId             The identifier which uniquely identifies the merchant on the Paga platform. May be the merchant UUID, id, or code.
  * @param   {string}    locale                  The language/locale to be used in messaging. If provided, this must conform to the IETF language tag standard
  
  * @return {Promise}                            A Promise Object thats receives the response
@@ -1077,23 +1074,23 @@ this.getMerchantServices = async (
     merchantPublicId, 
     locale) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "merchantPublicId" : merchantPublicId,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       merchantPublicId,
+       locale
     }
 
-    var sBuilder = []
+    let sBuilder = []
     sBuilder.push(referenceNumber + merchantPublicId + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getMerchantServices", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getMerchantServices", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1128,22 +1125,22 @@ this.getBanks = async (
     referenceNumber, 
     locale) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "locale" : locale
+    const obj = {
+       referenceNumber,
+       locale
     }
 
-    var sBuilder = []
+    let sBuilder = []
     sBuilder.push(referenceNumber + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getBanks", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getBanks", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1177,22 +1174,22 @@ this.getOperationStatus = async (
     referenceNumber, 
     locale) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-        "referenceNumber" : referenceNumber,
-       "locale" : locale
+    const obj = {
+        referenceNumber,
+        locale
     }
 
-    var sBuilder = []
+    let sBuilder = [];
     sBuilder.push(referenceNumber + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getOperationStatus", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getOperationStatus", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1226,22 +1223,22 @@ this.getMobileOperators = async (
     referenceNumber, 
     locale ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-        "referenceNumber" : referenceNumber,
-       "locale" : locale
+    const obj = {
+        referenceNumber,
+        locale
     }
 
-    var sBuilder = []
+    let sBuilder = []
     sBuilder.push(referenceNumber  + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getMobileOperators", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getMobileOperators", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1255,7 +1252,7 @@ this.getMobileOperators = async (
 
 
 /**
- * @param   {Array}    MoneyTransferItem         A list of the money transfer items included in this bulk operation
+ * @param   {Array}    moneyTransferItems        A list of the money transfer items included in this bulk operation
  * @param   {string}    bulkReferenceNumber A unique bulk reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response
  
  * @return {Promise}                            A Promise Object thats receives the response
@@ -1283,25 +1280,25 @@ this.moneyTransferBulk = async (
     bulkReferenceNumber,
      moneyTransferItems ) => {
        
-    var server = (this.test) ? test_server : live_server;
-    var {
-        referenceNumber : moneyTransferItemsReferenceNumber,
-        amount : moneyTransferItemsAmount,
+    let server = (this.test) ? test_server : live_server;
+    let {
+        referenceNumber: moneyTransferItemsReferenceNumber,
+        amount: moneyTransferItemsAmount,
         destinationAccount : moneyTransferItemsDestinationAccount
     } = moneyTransferItems
 
-    var obj = {
-        "bulkReferenceNumber": bulkReferenceNumber,
+    let obj = {
+        bulkReferenceNumber,
         moneyTransferItems
     }
 
-    var sBuilder = []
+    let sBuilder = [];
     sBuilder.push(moneyTransferItemsReferenceNumber + moneyTransferItemsAmount + moneyTransferItemsDestinationAccount + obj.moneyTransferItems.length + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
         response = await this.buildRequest(server + service_url + "secured/moneyTransferBulk", hashString, obj)
     } catch (error) {
@@ -1319,7 +1316,7 @@ this.moneyTransferBulk = async (
 
 
 /**
- * @param   {string}    reference               A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response
+ * @param   {string}    referenceNumber               A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response
  * @param   {string}    merchantExternalId      A unique reference number provided by the business, identifying the specific Organization account to be created.
  * @param   {Object}    merchantInfo            Containing information about the Organization to be created. 
  * @param   {Object}    integration             Contains information about the type of notification to be used for notification of received payments.
@@ -1377,30 +1374,30 @@ this.onboardMerchant = async ( referenceNumber,
                                 merchantInfo, 
                                 integration ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var { name : merchantInfoLegalEntityName } = merchantInfo.legalEntity
-    var {
+    let { name : merchantInfoLegalEntityName } = merchantInfo.legalEntity
+    let {
         phone: merchantInfoLegalEntityRepresentativePhone,
         email: merchantInfoLegalEntityRepresentativeEmail  
     } = merchantInfo.legalEntityRepresentative
-    var obj = {
+    const obj = {
         "reference": referenceNumber,
         merchantExternalId,
         merchantInfo,
         integration
     }
 
-    var sBuilder = []
+    let sBuilder = [];
     sBuilder.push(referenceNumber + merchantExternalId + merchantInfoLegalEntityName + merchantInfoLegalEntityRepresentativePhone +
         merchantInfoLegalEntityRepresentativeEmail + this.hash)
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/onboardMerchant", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/onboardMerchant", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1444,24 +1441,24 @@ this.getMerchantAccountDetails = async (
     merchantServiceProductCode 
     ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "merchantAccount" : merchantAccount,
-       "merchantReferenceNumber" : merchantReferenceNumber,
-       "merchantServiceProductCode":merchantServiceProductCode
+    const obj = {
+       referenceNumber,
+       merchantAccount,
+       merchantReferenceNumber,
+       merchantServiceProductCode
     }
 
-    var sBuilder = []
-    sBuilder.push(referenceNumber + merchantAccount+ merchantReferenceNumber+ merchantServiceProductCode+ this.hash)
+    let sBuilder = [];
+    sBuilder.push(referenceNumber + merchantAccount+ merchantReferenceNumber+ merchantServiceProductCode+ this.hash);
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getMerchantAccountDetails", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getMerchantAccountDetails", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
@@ -1505,24 +1502,24 @@ this.getMerchantAccountDetails = async (
     merchantServiceProductCode 
     ) => {
        
-    var server = (this.test) ? test_server : live_server;
+    let server = (this.test) ? test_server : live_server;
 
-    var obj = {
-       "referenceNumber" : referenceNumber,
-       "merchantAccount" : merchantAccount,
-       "merchantReferenceNumber" : merchantReferenceNumber,
-       "merchantServiceProductCode":merchantServiceProductCode
+    const obj = {
+       referenceNumber,
+       merchantAccount,
+       merchantReferenceNumber,
+       merchantServiceProductCode
     }
 
-    var sBuilder = []
-    sBuilder.push(referenceNumber + merchantAccount+ merchantReferenceNumber+ merchantServiceProductCode+ this.hash)
+    let sBuilder = []
+    sBuilder.push(referenceNumber + merchantAccount+ merchantReferenceNumber+ merchantServiceProductCode+ this.hash);
     sBuilder.join("")
 
-    var hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
 
-    var response
+    let response;
     try {
-        response = await this.buildRequest(server + service_url + "secured/getMerchantAccountDetails", hashString, obj)
+        response = await this.buildRequest(server + service_url + "secured/getMerchantAccountDetails", hashString, obj);
     } catch (error) {
         response = {
             "errorCode" : -1,
