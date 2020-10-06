@@ -1409,66 +1409,6 @@ this.onboardMerchant = async ( referenceNumber,
 
 }
 
-/**
- * @param   {string}    referenceNumber                       A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response
- * @param   {string}    merchantReferenceNumber               The Organization public ID for which you want to get customer account details
- * @param   {string}    merchantServiceProductCode            Customer account Number at the Organization
- * @param   {string}    merchantServiceProductCode            Merchant service code specifying which of the merchant's services are being paid for
- * 
- * @return {Promise}                                          A Promise Object thats receives the response
-
-  Sample Successful Response =>  {
-                "responseCode":0,
-                "message":"Success",
-                "customerName":"Mock User",
-                "phoneNumber":null,
-                "accountNumber":"Mock User",
-                "details":{
-                    "First Name":"Mock",
-                    "details":"Mock User",
-                    "Last Name":"User",
-                    "customerName":"Mock User",
-                    "merchantAccountDetails":"Mock User"
-                }
-}
-
- */
-
-this.getMerchantAccountDetails = async (
-    referenceNumber, 
-    merchantAccount,
-    merchantReferenceNumber,
-    merchantServiceProductCode 
-    ) => {
-       
-    let server = (this.test) ? test_server : live_server;
-
-    const obj = {
-       referenceNumber,
-       merchantAccount,
-       merchantReferenceNumber,
-       merchantServiceProductCode
-    }
-
-    let sBuilder = [];
-    sBuilder.push(referenceNumber + merchantAccount+ merchantReferenceNumber+ merchantServiceProductCode+ this.hash);
-    sBuilder.join("")
-
-    let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
-
-    let response;
-    try {
-        response = await this.buildRequest(server + service_url + "secured/getMerchantAccountDetails", hashString, obj);
-    } catch (error) {
-        response = {
-            "errorCode" : -1,
-            "exception" : error,
-        }
-    } finally {
-        return response;
-    }
-
-}
 
 /**
  * @param   {string}    referenceNumber                       A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response
