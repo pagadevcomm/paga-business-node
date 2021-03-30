@@ -14,9 +14,9 @@ class PagaBusinessClient {
         this.hash = apiKey;
         this.test = test;
 
-        const test_server = "https://beta.";
-        const live_server = "https://www.";
-        const service_url = "mypaga.com/paga-webservices/business-rest/";
+        const test_server = "https://beta.mypaga.com";
+        const live_server = "https://www.mypaga.com";
+        const service_url = "/paga-webservices/business-rest/";
 
         /**
          * @param {string} uri
@@ -1493,6 +1493,155 @@ class PagaBusinessClient {
             }
 
         };
+
+                     /**
+         * @param   {string}  referenceNumber               A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response.
+         * @param   {string}  phoneNumber                        The amount of money to transfer to the recipient.
+         * @param   {string}  firstName                      The currency of the operation, if being executed in a foreign currency.
+         * @param   {string}  lastName           The account identifier for the recipient receiving the money transfer. This account identifier may be a phone number, account nickname, or any other unique account identifier supported by the Paga platform. If destinationBank is specified, this is the bank account number.
+         * @param   {string}  accountName               For money transfers to a bank account, this is the destination bank code.
+         * @param   {string}  financialIdentificationNumber               The authentication principal for the user sending money if the money is being sent on behalf of a user. If null, the money transfer will be processed from the 3rd parties own account.
+         * @param   {string}  accountReference            The authentication credentials for the user sending money if the money is being sent on behalf of a user
+         *
+         * @return {Promise}                                A Promise Object thats receives the response
+         *
+         * Sample Successful Response =>    {
+                                            "responseCode": 0,
+                                            "message": null,
+                                            "referenceNumber": "0053459875439143453000",
+                                            "accountReference": "123467891334",
+                                            "accountNumber": "3414743183"
+                                            }
+         *
+         *
+         */
+                                            this.registerPersistentPaymentAccount = async (
+                                                referenceNumber,
+                                                phoneNumber,
+                                                firstName,
+                                                lastName,                                                                                                                                                                                                                                           
+                                                accountName,
+                                                financialIdentificationNumber,
+                                                accountReference
+                                                ) => {
+                                    
+                                                let server = (this.test) ? test_server : live_server;
+                                                const obj = {
+                                                    referenceNumber,
+                                                    phoneNumber,
+                                                    firstName,
+                                                    lastName,                                                                                                                                                                                                                                           
+                                                    accountName,
+                                                    financialIdentificationNumber,
+                                                    accountReference
+                                                };
+                                    
+                                                let sBuilder = [];
+                                                sBuilder.push(referenceNumber + phoneNumber+ this.hash);
+                                                sBuilder.join("");
+                                    
+                                                let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+                                    
+                                                let response;
+                                                try {
+                                                    response = await this.buildRequest(server + service_url + "secured/registerPersistentPaymentAccount", hashString, obj);
+                                                } catch (error) {
+                                                    response = {
+                                                        "errorCode": -1,
+                                                        "exception": error,
+                                                    };
+                                                } finally {
+                                                    return response;
+                                                }
+                                    
+                                            };
+                                    
+                                    
+                                            /**
+                                             * @param   {string}    referenceNumber             A unique reference number provided by the business, identifying the transaction. This reference number will be preserved on the Paga platform to reconcile the operation across systems and will be returned in the response.
+                                             * @param   {string}    accountNumber               A valid Persistent Payment Account Number.
+                                             * @param   {boolean}   getLatestSingleActivity     A flag if set to true would return only the last activity on the Persistent Payment Account
+                                             * @param   {Date}      startDate                   The start date for which records are to be returned.
+                                             * @param   {Date}      endDate                     The end of the time frame for the records to be returned.
+                                             * @param   {string}    accountReference            This is a unique reference number provided by the Organization which identifies the persistent account Number. It should have a minimum length of 12 characters and a maximum length of 30 characters
+                                             
+                                             * @return {Promise}                                A Promise Object thats receives the response
+                                            
+                                                Sample Successful Response =>   {
+                                                "responseCode": 0,
+                                                "message": "1 items returned",
+                                                "referenceNumber": "45345987543914345346",
+                                                "recordCount": 1,
+                                                "accountNumber": "2741938938",
+                                                "accountReference":"324324999212",
+                                                "accountName": null,
+                                                "phoneNumber": "+2347057683124",
+                                                "firstName": "Tangio",
+                                                "lastName": "Succor",
+                                                "email": "tangio@gmail.com",
+                                                "financialIdentificationNumber": null,
+                                                "items": [
+                                                {
+                                                    "itemNumber": 1,
+                                                    "amount": null,
+                                                    "currencyCode": "NGN",
+                                                    "paymentDate": "2021-02-10T15:17:55",
+                                                    "paymentMethod": "BANK_TRANSFER",
+                                                    "paymentReference": "PAGA|00010400|XY48L9638399205M",
+                                                    "transactionReference": "DFB-U_20210210151755353_1235466_J1D0B",
+                                                    "transactionServiceIdentifier": "J1D0B",
+                                                    "status": "SUCCESSFUL",
+                                                    "paymentBank": "Access Bank",
+                                                    "paymentFee": "4.30",
+                                                    "paymentNarration": "Pay for my Uber",
+                                                    "isInstantSettlement": "true",
+                                                    "instantSettlementAmount": "341.95",
+                                                    "instantSettlementFee": "53.75"
+                                                }
+                                            ]
+                                    }
+                                            
+                                            
+                                             */
+                                            this.getPersistentPaymentAccountActivity = async (
+                                                referenceNumber,
+                                                accountNumber,
+                                                getLatestSingleActivity,
+                                                startDate,
+                                                endDate,
+                                                accountReference,
+                                               ) => {
+                                    
+                                                let server = (this.test) ? test_server : live_server;
+                                    
+                                                const obj = {
+                                                    referenceNumber,
+                                                    accountNumber,
+                                                    getLatestSingleActivity,
+                                                    startDate,
+                                                    endDate,
+                                                    accountReference
+                                                };
+                                    
+                                                let sBuilder = [];
+                                                sBuilder.push(referenceNumber + this.hash);
+                                                sBuilder.join("");
+                                    
+                                                let hashString = this.createHashSHA512(sBuilder.toString(), 1, true).toString();
+                                    
+                                                let response;
+                                                try {
+                                                    response = await this.buildRequest(server + service_url + "secured/getPersistentPaymentAccountActivity", hashString, obj);
+                                                } catch (error) {
+                                                    response = {
+                                                        "errorCode": -1,
+                                                        "exception": error,
+                                                    };
+                                                } finally {
+                                                    return response;
+                                                }
+                                    
+                                            };
 
 
     }
